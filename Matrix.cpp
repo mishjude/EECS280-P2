@@ -147,15 +147,17 @@ int Matrix_column_of_min_value_in_row(const Matrix* mat, int row,
 
   int start_index = row * Matrix_width(mat) + column_start;
   int min_element = mat->data[start_index];
+  int min_col = column_start;
 
   for (int col = column_start; col < column_end; col++) {
     int index = row * Matrix_width(mat) + col;
     if (mat->data[index] < min_element) {
       min_element = mat->data[index];
+      min_col = col;
     }
   }
 
-  return min_element;
+  return min_col;
 }
 
 // REQUIRES: mat points to a valid Matrix
