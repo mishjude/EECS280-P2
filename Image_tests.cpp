@@ -156,6 +156,56 @@ TEST(test_image_set_pixel) {
   ASSERT_EQUAL(actualPixel.g, expectedPixel.g);
   ASSERT_EQUAL(actualPixel.b, expectedPixel.b);
 }
+// Test case for Image_get_pixel
+TEST(test_image_get_pixel2) {
+    Image img; // Create an Image object
+
+    // Initialize the Image with known dimensions
+    const int width = 3;
+    const int height = 3;
+    Image_init(&img, width, height);
+
+    // Set specific pixels in the color channels
+    const Pixel expectedPixel = {100, 150, 200};
+    const int row = 1;
+    const int column = 1;
+    *Matrix_at(&img.red_channel, row, column) = expectedPixel.r;
+    *Matrix_at(&img.green_channel, row, column) = expectedPixel.g;
+    *Matrix_at(&img.blue_channel, row, column) = expectedPixel.b;
+
+    // Call the Image_get_pixel function to retrieve the pixel
+    Pixel actualPixel = Image_get_pixel(&img, row, column);
+
+    // Check if the actual pixel matches the expected pixel
+    ASSERT_EQUAL(actualPixel.r, expectedPixel.r);
+    ASSERT_EQUAL(actualPixel.g, expectedPixel.g);
+    ASSERT_EQUAL(actualPixel.b, expectedPixel.b);
+}
+// Test case for Image_fill
+TEST(test_image_fill2) {
+    Image img; // Create an Image object
+
+    // Initialize the Image with known dimensions
+    const int width = 4;
+    const int height = 4;
+    Image_init(&img, width, height);
+
+    // Define the fill color
+    const Pixel fillColor = {100, 150, 200};
+
+    // Call the Image_fill function to fill the Image with the specified color
+    Image_fill(&img, fillColor);
+
+    // Check if all pixels in the Image have the same color as the fill color
+    for (int i = 0; i < Image_height(&img); i++) {
+    for (int j = 0; j < Image_width(&img); j++) {
+      Pixel actualPixel = Image_get_pixel(&img, i, j);
+      ASSERT_EQUAL(actualPixel.r, fillColor.r);
+      ASSERT_EQUAL(actualPixel.g, fillColor.g);
+      ASSERT_EQUAL(actualPixel.b, fillColor.b);
+    }
+  }
+}
 
 
 
