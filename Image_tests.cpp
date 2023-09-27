@@ -55,19 +55,8 @@ TEST(test_image_init) {
     ASSERT_EQUAL(Image_width(&img), 4);
     ASSERT_EQUAL(Image_height(&img), 3);
 }
-TEST(test_image_init) {
-    Image* img = new Image;
-    int width = 10;
-    int height = 5;
 
-    Image_init(img, width, height);
 
-    ASSERT_EQUAL(Image_width(img), width);
-    ASSERT_EQUAL(Image_height(img), height);
-
-    // Clean up
-    delete img;
-}
 
 TEST(test_image_width) {
   Image img; // Create an Image object
@@ -167,14 +156,7 @@ TEST(test_image_set_pixel) {
   ASSERT_EQUAL(actualPixel.g, expectedPixel.g);
   ASSERT_EQUAL(actualPixel.b, expectedPixel.b);
 }
-// EFFECTS: Returns true if p1 and p2 are equal. Returns false otherwise.
-bool Pixel_equal(Pixel p1, Pixel p2);
 
-// REQUIRES: img1 points to a valid Image
-//           img2 points to a valid Image
-// EFFECTS:  Returns true if img1 and img2 are the same size and
-//           contain exactly the same pixels. Returns false otherwise.
-bool Image_equal(const Image* img1, const Image* img2);
 
 
 // NOTE: The unit test framework tutorial in Lab 2 originally
