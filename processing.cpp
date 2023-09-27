@@ -150,7 +150,7 @@ void compute_vertical_cost_matrix(const Matrix* energy, Matrix *cost) {
       
       for (int l = start + 1; l <= end; l++) {
         if (*Matrix_at(cost, j - 1, l) < min) {
-          min = *Matrix_at(cost, j - 1, l);
+        min = *Matrix_at(cost, j - 1, l);
         }
       }
       
