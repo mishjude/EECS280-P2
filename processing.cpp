@@ -147,16 +147,12 @@ void compute_vertical_cost_matrix(const Matrix* energy, Matrix *cost) {
       }
 
       int min = *Matrix_at(cost, j - 1, start);
-
-      if (*Matrix_at(cost, start, end) < min) {
-          min = *Matrix_at(cost, start, end);
-      }
       
-      //for (int l = start + 1; l <= end; l++) {
-        //if (*Matrix_at(cost, j - 1, l) < min) {
-          //min = *Matrix_at(cost, j - 1, l);
-        //}
-      //}
+      for (int l = start + 1; l <= end; l++) {
+        if (*Matrix_at(cost, j - 1, l) < min) {
+          min = *Matrix_at(cost, j - 1, l);
+        }
+      }
       
       *Matrix_at(cost, j,  k) = *Matrix_at(energy, j,  k) + min;
     }
@@ -191,7 +187,7 @@ void find_minimal_vertical_seam(const Matrix* cost, int seam[]) {
     for (int i = (Matrix_height(cost) - 2); i >= 0; i--){
       if (prev_seam <= 0) {
         start = 0;
-        end = 1;
+        end = 2;
       } else if (prev_seam == Matrix_width(cost) - 1) {
         start = prev_seam - 1;
         end = prev_seam + 1;
