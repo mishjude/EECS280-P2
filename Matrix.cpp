@@ -26,7 +26,7 @@ void Matrix_print(const Matrix* mat, std::ostream& os) {
   os << Matrix_width(mat) << " " << Matrix_height(mat) << endl;
   for (int row = 0; row < Matrix_height(mat); row++) {
     for (int col = 0; col < Matrix_width(mat); col++) {
-      os << mat->data[row * mat->width + col] << " ";
+    os << mat->data[row * mat->width + col] << " ";
     }
     os << endl;
   } 
@@ -56,7 +56,7 @@ int Matrix_row(const Matrix* mat, const int* ptr) {
 //           ptr point to an element in the Matrix
 // EFFECTS:  Returns the column of the element pointed to by ptr.
 int Matrix_column(const Matrix* mat, const int* ptr) {
-   int index = ptr - mat->data;
+  int index = ptr - mat->data;
   return index % mat->width;
 }
 
@@ -141,7 +141,7 @@ int Matrix_max(const Matrix* mat) {
 //           If multiple elements are minimal, returns the column of
 //           the leftmost one.
 int Matrix_column_of_min_value_in_row(const Matrix* mat, int row,
-                                      int column_start, int column_end) {
+  int column_start, int column_end) {
   assert(row >= 0 && row < mat->height);
   assert(column_start >= 0 && column_end <= Matrix_width(mat));
   assert(column_start < column_end);
@@ -169,7 +169,7 @@ int Matrix_column_of_min_value_in_row(const Matrix* mat, int row,
 //           is defined as elements in the given row and between
 //           column_start (inclusive) and column_end (exclusive).
 int Matrix_min_value_in_row(const Matrix* mat, int row,
-                            int column_start, int column_end) {
+  int column_start, int column_end) {
   assert(row >= 0 && row < mat->height);
   assert(column_start >= 0 && column_end <= Matrix_width(mat));
   assert(column_start < column_end);
