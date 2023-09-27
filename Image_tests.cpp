@@ -45,6 +45,137 @@ TEST(test_print_basic) {
 
 // IMPLEMENT YOUR TEST FUNCTIONS HERE
 // You are encouraged to use any functions from Image_test_helpers.hpp as needed.
+// Test case for Image_init
+
+TEST(test_image_init) {
+    Image img;
+    Image_init(&img, 4, 3); // Initialize with width 4 and height 3
+
+    // Check that width and height are correctly set
+    ASSERT_EQUAL(Image_width(&img), 4);
+    ASSERT_EQUAL(Image_height(&img), 3);
+}
+TEST(test_image_init) {
+    Image* img = new Image;
+    int width = 10;
+    int height = 5;
+
+    Image_init(img, width, height);
+
+    ASSERT_EQUAL(Image_width(img), width);
+    ASSERT_EQUAL(Image_height(img), height);
+
+    // Clean up
+    delete img;
+}
+
+TEST(test_image_width) {
+  Image img; // Create an Image object
+
+  // Initialize the Image with a known width
+  const int expectedWidth = 4;
+  img.width = expectedWidth;
+
+  // Call the Image_width function and store the result
+  const int actualWidth = Image_width(&img);
+
+  // Check if the actual width matches the expected width
+  ASSERT_EQUAL(actualWidth, expectedWidth);
+}
+TEST(test_image_height) {
+  Image img; // Create an Image object
+
+  // Initialize the Image with a known height
+  const int expectedHeight = 5;
+  img.height = expectedHeight;
+
+  // Call the Image_height function and store the result
+  const int actualHeight = Image_height(&img);
+
+  // Check if the actual height matches the expected height
+  ASSERT_EQUAL(actualHeight, expectedHeight);
+}
+TEST(test_image_get_pixel) {
+  Image img; // Create an Image object
+
+  // Initialize the Image with known dimensions
+  const int width = 3;
+  const int height = 3;
+  Image_init(&img, width, height);
+
+  // Set specific pixels in the color channels
+  const Pixel expectedPixel = {100, 150, 200};
+  const int row = 1;
+  const int column = 1;
+  *Matrix_at(&img.red_channel, row, column) = expectedPixel.r;
+  *Matrix_at(&img.green_channel, row, column) = expectedPixel.g;
+  *Matrix_at(&img.blue_channel, row, column) = expectedPixel.b;
+
+  // Call the Image_get_pixel function to retrieve the pixel
+  Pixel actualPixel = Image_get_pixel(&img, row, column);
+
+  // Check if the actual pixel matches the expected pixel
+  ASSERT_EQUAL(actualPixel.r, expectedPixel.r);
+  ASSERT_EQUAL(actualPixel.g, expectedPixel.g);
+  ASSERT_EQUAL(actualPixel.b, expectedPixel.b);
+}
+TEST(test_image_fill) {
+  Image img; // Create an Image object
+
+  // Initialize the Image with known dimensions
+  const int width = 4;
+  const int height = 4;
+  Image_init(&img, width, height);
+
+  // Define the fill color
+  const Pixel fillColor = {100, 150, 200};
+
+  // Call the Image_fill function to fill the Image with the specified color
+  Image_fill(&img, fillColor);
+
+  // Check if all pixels in the Image have the same color as the fill color
+  for (int i = 0; i < Image_height(&img); i++) {
+    for (int j = 0; j < Image_width(&img); j++) {
+      Pixel actualPixel = Image_get_pixel(&img, i, j);
+      ASSERT_EQUAL(actualPixel.r, fillColor.r);
+      ASSERT_EQUAL(actualPixel.g, fillColor.g);
+      ASSERT_EQUAL(actualPixel.b, fillColor.b);
+    }
+  }
+}
+TEST(test_image_set_pixel) {
+  Image img; // Create an Image object
+
+  // Initialize the Image with known dimensions
+  const int width = 3;
+  const int height = 3;
+  Image_init(&img, width, height);
+
+  // Define the row, column, and color for the pixel
+  const int row = 1;
+  const int column = 1;
+  const Pixel expectedPixel = {100, 150, 200};
+
+  // Call the Image_set_pixel function to set the pixel
+  Image_set_pixel(&img, row, column, expectedPixel);
+
+  // Retrieve the actual pixel from the Image
+  Pixel actualPixel = Image_get_pixel(&img, row, column);
+
+  // Check if the actual pixel matches the expected pixel
+  ASSERT_EQUAL(actualPixel.r, expectedPixel.r);
+  ASSERT_EQUAL(actualPixel.g, expectedPixel.g);
+  ASSERT_EQUAL(actualPixel.b, expectedPixel.b);
+}
+// EFFECTS: Returns true if p1 and p2 are equal. Returns false otherwise.
+bool Pixel_equal(Pixel p1, Pixel p2);
+
+// REQUIRES: img1 points to a valid Image
+//           img2 points to a valid Image
+// EFFECTS:  Returns true if img1 and img2 are the same size and
+//           contain exactly the same pixels. Returns false otherwise.
+bool Image_equal(const Image* img1, const Image* img2);
+
 
 // NOTE: The unit test framework tutorial in Lab 2 originally
 // had a semicolon after TEST_MAIN(). Although including and
