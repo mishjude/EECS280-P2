@@ -95,7 +95,9 @@ Pixel Image_get_pixel(const Image* img, int row, int column) {
   assert(row >= 0 && row <= Image_height(img));
   assert(column >= 0 && column < Image_width(img));
 
-  Pixel img_pixel = {*Matrix_at(&(*img).red_channel, row, column), *Matrix_at(&(*img).green_channel, row, column),*Matrix_at(&(*img).blue_channel, row, column)};
+  Pixel img_pixel = {*Matrix_at(&(*img).red_channel, row, column), 
+  *Matrix_at(&(*img).green_channel, row, column),
+  *Matrix_at(&(*img).blue_channel, row, column)};
 
   return img_pixel;
 }

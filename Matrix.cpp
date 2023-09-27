@@ -107,7 +107,8 @@ void Matrix_fill(Matrix* mat, int value) {
 void Matrix_fill_border(Matrix* mat, int value) {
    for (int row = 0; row < Matrix_height(mat); row++) {
     for (int col = 0; col < Matrix_width(mat); col++) {
-      if (row == 0 || row == Matrix_height(mat) - 1 || col == 0 || col == Matrix_width(mat) - 1) {
+      if (row == 0 || row == Matrix_height(mat) - 1 || 
+      col == 0 || col == Matrix_width(mat) - 1) {
         mat->data[row * mat->width + col] = value;
       }
     }
